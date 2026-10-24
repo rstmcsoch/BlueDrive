@@ -424,7 +424,7 @@ public class MainActivity extends AppCompatActivity {
                         fileUri,
                         Intent.FLAG_GRANT_READ_URI_PERMISSION
                 );
-                android.util.Log.d("MainActivity", "\u2713 Persistable permission granted for: " + fileUri);
+                android.util.Log.d("MainActivity", "✓ Persistable permission granted for: " + fileUri);
             } catch (SecurityException e) {
                 android.util.Log.w("MainActivity", "Could not take persistable permission: " + e.getMessage());
             }
@@ -484,7 +484,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onUploadProgress(int progress) {
                             runOnUiThread(() -> {
-                                android.util.Log.d("MainActivity", "\ud83d\udce4 Upload progress: " + progress + "% for " + cloudFile.getName());
+                                android.util.Log.d("MainActivity", "📤 Upload progress: " + progress + "% for " + cloudFile.getName());
                                 cloudFile.setUploadProgress(progress);
                             });
                         }
@@ -494,7 +494,7 @@ public class MainActivity extends AppCompatActivity {
                             runOnUiThread(() -> {
                                 activeUploads.remove(cloudFile.getId()); // --- CLEANUP MAP ---
 
-                                android.util.Log.d("MainActivity", "\u2705 Upload complete: " + cloudFile.getName());
+                                android.util.Log.d("MainActivity", "✅ Upload complete: " + cloudFile.getName());
 
                                 // ... (rest of the method is unchanged)
                                 cloudFile.setUploaded(true);
