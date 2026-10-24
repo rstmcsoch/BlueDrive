@@ -192,7 +192,7 @@ public class ImageViewerActivity extends AppCompatActivity {
         // Clean up: Delete the downloaded image file
         if (downloadedImageFile != null && downloadedImageFile.exists()) {
             if (downloadedImageFile.delete()) {
-                Log.i(TAG, "\u2713 Temp image file deleted: " + downloadedImageFile.getName());
+                Log.i(TAG, "✓ Temp image file deleted: " + downloadedImageFile.getName());
             } else {
                 Log.w(TAG, "Failed to delete temp image: " + downloadedImageFile.getName());
             }
