@@ -2,6 +2,7 @@
 """Offline sanity checks, not a substitute for AAPT, lint or device tests."""
 from pathlib import Path
 import re
+from resource_assets import missing_asset_references
 import xml.etree.ElementTree as ET
 
 root = Path(__file__).resolve().parents[1]
@@ -16,7 +17,7 @@ for path in res.rglob('*.xml'):
 ids = set()
 for path in res.rglob('*.xml'):
     ids.update(re.findall(r'@\+id/(\w+)', path.read_text()))
-errors = []
+errors = missing_asset_references(res, root/'app/src/main/AndroidManifest.xml')
 for path in (root / 'app/src/main/java').rglob('*.java'):
     for kind, name in re.findall(r'(?<!android\.)R\.(string|color|layout|drawable|id)\.(\w+)', path.read_text()):
         valid = name in ids if kind == 'id' else (name in names.get(kind, set()) if kind in ('string', 'color') else any(res.glob(f'{kind}*/{name}.*')))
@@ -28,4 +29,4 @@ for qualifier in ('values-fr', 'values-ar'):
     if expected != actual:
         errors.append(f'{qualifier}: untranslated redesign strings')
 assert not errors, '\n'.join(errors)
-print('PASS: XML parses, Java resource references resolve, new translation keys match.')
+print('PASS: XML parses, Java/XML asset references resolve, new translation keys match.')
