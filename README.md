@@ -1,157 +1,217 @@
-# TeleVault 🏦⌯⌲
+BlueDrive ☁️
 
-**Turn your unlimited Telegram cloud storage into a fully-featured file manager on your Android device.**
+Your personal cloud file manager for Android, powered by Telegram.
 
-TeleVault is an Android application that leverages the Telegram Bot API to provide a simple, effective, and free personal cloud storage solution. Upload, download, share, and manage your files securely in a private Telegram channel, all through a clean and intuitive interface.
+BlueDrive transforms a private Telegram channel into a convenient cloud-backed file library. Upload, organize, browse, download, and share your files directly from your Android device through a clean and intuitive interface.
 
-<!-- Top row: 4 images -->
-<p align="center">
-  <img src="https://github.com/Moorix101/TeleVault/blob/main/assets/1.jpg" width="150" />
-  <img src="https://github.com/Moorix101/TeleVault/blob/main/assets/2.jpeg" width="150" />
-  <img src="https://github.com/Moorix101/TeleVault/blob/main/assets/3.jpg" width="150" />
-  <img src="https://github.com/Moorix101/TeleVault/blob/main/assets/4.jpg" width="150" />
-</p>
-
-<!-- Bottom row: 3 images -->
-<p align="center">
-  <img src="https://github.com/Moorix101/TeleVault/blob/main/assets/5.jpg" width="150" />
-  <img src="https://github.com/Moorix101/TeleVault/blob/main/assets/6.jpg" width="150" />
-  <img src="https://github.com/Moorix101/TeleVault/blob/main/assets/7.jpg" width="150" />
-</p>
-
-
+Instead of searching through Telegram messages manually, BlueDrive gives you a dedicated space to manage your files, track storage usage, filter content by type, and access your saved media whenever you need it.
 
 ---
 
-## 📖 Table of Contents
+📖 Table of Contents
 
-- [About The Project](#about-the-project-)
-- [Key Features](#-key-features)
-- [How It Works](#-how-it-works)
-- [Getting Started](#-getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Step 1: Create Your Telegram Bot](#step-1-create-your-telegram-bot)
-  - [Step 2: Create a Private Channel](#step-2-create-a-private-channel)
-  - [Step 3: Get Your Chat ID](#step-3-get-your-chat-id)
-  - [Step 4: Configure the App](#step-4-configure-the-app)
-- [How to Use the App](#-how-to-use-the-app)
-- [Technical Details](#-technical-details)
-- [License](#-license)
-
----
-
-## About The Project 🌟
-
-The idea behind TeleVault is simple: Telegram offers unlimited cloud storage for any file type. This project provides a user-friendly Android client to interact with that storage, making it feel like a conventional cloud service.
-
-Instead of manually uploading and searching for files in a chat, TeleVault keeps a local database of your files, allowing you to browse, sort, download, and delete them with ease. The database itself is stored as a simple text file (`televault_files.txt`) in your device's `Documents/TeleVault` folder, ensuring your file list persists even if you reinstall the app.
+- "About BlueDrive" (#about-bluedrive)
+- "Key Features" (#key-features)
+- "How It Works" (#how-it-works)
+- "Getting Started" (#getting-started)
+  - "Prerequisites" (#prerequisites)
+  - "Step 1: Create a Telegram Bot" (#step-1-create-a-telegram-bot)
+  - "Step 2: Create a Private Channel" (#step-2-create-a-private-channel)
+  - "Step 3: Get Your Chat ID" (#step-3-get-your-chat-id)
+  - "Step 4: Configure BlueDrive" (#step-4-configure-bluedrive)
+- "How to Use BlueDrive" (#how-to-use-bluedrive)
+- "Technical Details" (#technical-details)
+- "Privacy and Limitations" (#privacy-and-limitations)
+- "License" (#license)
 
 ---
 
-## ✨ Key Features
+🌐 About BlueDrive
 
-- **⚙️ In-App Configuration:** No need to edit code! Enter your Bot Token and Chat ID directly in the app's Settings screen and test the connection.
-- **🌐 Multi-Language Support:** Fully translated and supports English, Arabic (العربية), and French (Français) with instant switching from the settings screen.
-- **🖼️ Built-in Image Viewer:** Tap on any uploaded image to open it in a full-screen, zoomable viewer (`PhotoView`).
-- **▶️ Video Playback:** Tap on any uploaded video to download it temporarily and play it in your device's default video player.
-- **📲 Upload Files:** Pick any file from your device (up to 50MB, the Telegram Bot API limit) and upload it directly to your private cloud.
-- **📤 Upload Status:** See which files are currently uploading. Cancel any upload in progress from the file menu.
-- **🖼️ Media Thumbnails:** Images and videos show a thumbnail in the file list (using Glide) for easy identification.
-- **📥 Download to Device:** Download any file from your cloud back to a dedicated `Documents/TeleVault/Download` folder on your device.
-- **🗑️ Permanent Deletion:** Delete files from both the app list and your Telegram channel permanently.
-- **🔗 Share Files Natively:** Use the Android native share sheet to send your cloud files to other apps (like WhatsApp, Gmail, etc.) without having to manually download them first.
-- **🗂️ Persistent File List:** Your list of files is saved on your device in the `Documents/TeleVault` folder and survives app uninstalls.
-- **🎨 Intuitive UI:** A clean, modern interface built with Material Design components.
-- **📊 Storage Insights:** A dashboard shows your total file count and storage used, plus counts for specific categories like Images, Videos, PDFs, and Other.
-- **🔍 Filter by Type:** Tap the category cards (Images, Videos, PDFs, Other) on the main screen to view a list of only that file type.
-- **🔐 Privacy-Focused:** Your files are stored in your own private channel, controlled by your own bot. No third-party servers are involved.
+BlueDrive is designed to make personal cloud storage simple and accessible.
+
+It uses the Telegram Bot API to store files in a private Telegram channel while providing an Android interface for browsing and managing them. BlueDrive also maintains a local index of your files, so you can find your content without manually searching through your Telegram channel.
+
+Your file index is stored as a text file named "bluedrive_files.txt" in your device's "Documents/BlueDrive" directory. This helps preserve your organized file list independently of the app installation, provided the file remains on your device.
+
+The idea is simple: your Telegram channel acts as the storage backend, while BlueDrive acts as your personal file manager.
 
 ---
 
-## 🔧 How It Works
+✨ Key Features
 
-TeleVault acts as a client for the Telegram Bot API. Here’s the basic flow:
-
-1. **Upload:** The app sends a `multipart/form-data` request to the `/sendDocument` bot API endpoint. A `TelegramUploader` class handles this.
-2. **Tracking:** Upon successful upload, Telegram returns a unique `file_id` and a `message_id`. TeleVault saves this information along with the file's metadata to a local text file (`televault_files.txt`).
-3. **Download:** To download a file, the app first calls the `/getFile` endpoint with the `file_id` to get a temporary download path. A `TelegramDownloader` class then downloads the file from that path.
-4. **Deletion:** The app calls the `/deleteMessage` endpoint using the stored `message_id` to remove the file message from your channel, effectively deleting the file from the cloud.
+- ⚙️ Easy Configuration: Enter your Telegram Bot Token and Chat ID directly in the Settings screen without modifying source code.
+- 🌍 Multi-Language Support: Switch between English, Arabic (العربية), and French (Français) from the app settings.
+- 📁 File Uploads: Select documents, images, videos, and other supported file types from your Android device and upload them to your private Telegram channel.
+- 📊 Upload Progress: Track active uploads and cancel an upload in progress when supported.
+- 🖼️ Image Viewer: Open images in a full-screen viewer with zoom support.
+- ▶️ Video Playback: Download videos temporarily and open them using your device's video player.
+- 🖼️ Media Thumbnails: Identify images and videos more easily with thumbnail previews.
+- 📥 File Downloads: Save files from your cloud library to "Documents/BlueDrive/Download".
+- 🔗 Native Sharing: Share available files through Android's native share interface.
+- 🗑️ File Management: Remove file entries and request deletion of their corresponding Telegram messages, subject to Telegram API restrictions.
+- 🗂️ Persistent File Index: Keep your organized file list in "Documents/BlueDrive/bluedrive_files.txt".
+- 📈 Storage Insights: View file counts and storage usage, including categories such as images, videos, PDFs, and other files.
+- 🔍 Smart Filtering: Filter the library by file category to find specific content faster.
+- 🎨 Clean Android Interface: Manage your files through an intuitive interface built with Android UI components.
+- 🔐 Personal Storage Control: Connect BlueDrive to your own Telegram bot and private channel instead of relying on a separate cloud-storage account provided by BlueDrive.
 
 ---
 
-## 🚀 Getting Started
+🔧 How It Works
 
-Follow these instructions to set up the app.
+BlueDrive uses the Telegram Bot API to manage your cloud-backed file library.
 
-### Prerequisites
+1. Upload
+
+When you select a file, BlueDrive sends it to your Telegram channel through the Bot API's "sendDocument" endpoint.
+
+2. File Tracking
+
+After a successful upload, Telegram returns file information such as a "file_id" and "message_id". BlueDrive stores the relevant metadata in its local index, "bluedrive_files.txt", so the file can be listed and managed inside the app.
+
+3. Download
+
+When you request a download, BlueDrive uses the stored file information with the Telegram Bot API's "getFile" endpoint and retrieves the file using the returned file path.
+
+4. Organization
+
+BlueDrive presents your saved files in an organized interface, with category filters, thumbnails, file counts, and storage information.
+
+5. Deletion
+
+BlueDrive can use Telegram's "deleteMessage" endpoint to request deletion of a file's message from the connected channel. Telegram's permissions and API restrictions apply.
+
+---
+
+🚀 Getting Started
+
+Follow the steps below to connect BlueDrive to your own Telegram storage.
+
+Prerequisites
 
 - An active Telegram account.
 - An Android device.
+- A Telegram bot created through BotFather.
+- A private Telegram channel in which your bot has the required permissions.
 
-### Step 1: Create Your Telegram Bot
+Step 1: Create a Telegram Bot
 
-1. Open Telegram and search for the **`@BotFather`** user (it has a blue checkmark).
-2. Send the `/newbot` command.
-3. Follow the prompts:
-   - Choose a name for your bot (e.g., "My Storage Bot").
-   - Choose a unique username that ends in `bot` (e.g., `my_personal_storage_bot`).
-4. BotFather will give you a unique API Token like: 123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11
-5. **Copy and save this token securely! This is your `BOT_TOKEN`.**
+1. Open Telegram and search for "@BotFather" (https://t.me/BotFather).
+2. Send the "/newbot" command.
+3. Follow the instructions to choose a display name for your bot.
+4. Create a unique username ending in "bot", such as "my_bluedrive_bot".
+5. Copy the API token provided by BotFather.
 
-### Step 2: Create a Private Channel
+Keep this token private. It provides access to your bot.
 
-1. Create a **New Channel** in Telegram.
-2. Give it a name (e.g., "My TeleVault Storage").
-3. Set it to **Private**.
-4. **Add your bot as an administrator** and grant permissions to **Post Messages** and **Delete Messages**.
+Your token will be used as "BOT_TOKEN".
 
-### Step 3: Get Your Chat ID
+Step 2: Create a Private Channel
 
-1. Forward any message from your new private channel to **`@userinfobot`**.
-2. The bot will reply with info — look for the **`Id:`** field.
-3. It will be a negative number like `-1001234567890`.
-4. **Copy and save this ID. This is your `CHAT_ID`.**
+1. Create a new Telegram channel.
+2. Give it a name, such as BlueDrive Cloud Storage.
+3. Set the channel visibility to Private.
+4. Add your newly created bot as an administrator.
+5. Grant the permissions required for posting messages and deleting messages.
 
-### Step 4: Configure the App
+Your channel will serve as the storage location for files uploaded through BlueDrive.
 
-1. Install TeleVault on your Android device.
-2. Open the app → tap **Settings Required** → “Go to Settings”.
-3. Paste your **`BOT_TOKEN`** and **`CHAT_ID`** in the fields.
-4. Tap **Check Connection** → you should see “Success”.
-5. Tap **Save Settings**.
-6. Done! You can now upload files.
+Step 3: Get Your Chat ID
 
----
+1. Find a Telegram bot or utility that can identify a channel's numeric chat ID.
+2. Follow its instructions to retrieve the ID of your private channel.
+3. Confirm that the returned ID belongs to the correct channel. Channel IDs commonly begin with "-100".
+4. Save the value for use in BlueDrive.
 
-## 📱 How to Use the App
+This value will be used as "CHAT_ID".
 
-1. **Grant Permissions:** On first launch, allow storage access (or “All Files Access” on newer Android versions).
-2. **Upload a File:** Tap the `+` Floating Action Button → choose a file.
-3. **View Media:** Tap any image/video to open it.
-4. **Filter Files:** Tap a dashboard card (Images, Videos, PDFs, Other) to filter.
-5. **Change Language:** Go to **Settings** → pick English, Arabic, or French.
-6. **Manage Files:**
-- Tap `⋮` on a file to open menu:
-  - **Download** → saves to `Documents/TeleVault/Download`.
-  - **Share File** → share via Android menu.
-  - **Remove from Vault** → permanently deletes from Telegram.
-  - **Cancel Upload** → stops current upload.
+Important: Keep your bot token and other credentials private. Never publish them in your README, source code, screenshots, or public repository.
+
+Step 4: Configure BlueDrive
+
+1. Install and open BlueDrive on your Android device.
+2. Navigate to Settings or the app's configuration screen.
+3. Enter your "BOT_TOKEN" and "CHAT_ID".
+4. Tap Check Connection to test the configuration.
+5. If the connection succeeds, save the settings.
+6. Open the main screen and upload your first file.
+
+BlueDrive is now connected to your configured Telegram channel.
 
 ---
 
-## 🛠️ Technical Details
+📱 How to Use BlueDrive
 
-- **Architecture:** Multiple activities (`MainActivity`, `SettingsActivity`, `FilteredFilesActivity`, `ImageViewerActivity`) using `RecyclerView` + `CardView`.
-- **Networking:** `HttpURLConnection` for Telegram API; background threads for uploads/downloads.
-- **UI Libraries:** `photoview` for zooming, `Glide` for thumbnails.
-- **i18n:** Uses `AppCompatDelegate.setApplicationLocales` and `LocaleHelper`.
-- **Persistence:** Simple pipe-delimited (`|`) text file database `televault_files.txt`.
-- **Permissions:** Supports runtime + `MANAGE_EXTERNAL_STORAGE` for Android 11+.
-- **File Sharing:** Uses `FileProvider` for secure `content://` URIs.
+Upload a File
+
+1. Open BlueDrive.
+2. Tap the "+" floating action button.
+3. Select a file from your device.
+4. Wait for the upload to finish.
+
+Browse Your Library
+
+Open the main screen to view your saved files and available storage statistics. Use category cards to filter images, videos, PDFs, or other files.
+
+View Images and Videos
+
+Tap a supported image to open it in the built-in viewer. Videos can be downloaded temporarily and opened using a compatible video player.
+
+Download a File
+
+1. Find the file in your library.
+2. Open its options menu.
+3. Select Download.
+4. Look for the downloaded file in "Documents/BlueDrive/Download".
+
+Share a File
+
+Open the file's options menu and choose Share File to access Android's sharing interface, where supported by the file and app implementation.
+
+Remove a File
+
+1. Open the file's options menu.
+2. Select the available removal or deletion option.
+3. Confirm the action when prompted.
+
+Deletion from Telegram depends on the bot's permissions and Telegram's message-deletion rules.
+
+Change the App Language
+
+Go to Settings and select an available language.
 
 ---
 
-## 📄 License
+🛠️ Technical Details
 
-Distributed under the MIT License.  
-See `LICENSE` for more information.
+- Platform: Android.
+- Architecture: Multiple activities for the main library, settings, filtered files, and image viewing.
+- Networking: "HttpURLConnection" for Telegram Bot API requests.
+- File Uploads: Multipart requests through the Telegram "sendDocument" endpoint.
+- File Downloads: Telegram's "getFile" endpoint and its returned file path.
+- UI Components: "RecyclerView" and "CardView" for displaying files and their metadata.
+- Image Viewer: PhotoView for zoomable image viewing.
+- Thumbnail Loading: Glide for image and video thumbnail handling.
+- Localization: Android application locale support and language helper utilities.
+- Persistence: Pipe-delimited ("|") local text database stored as "bluedrive_files.txt".
+- Storage Directory: "Documents/BlueDrive/".
+- Download Directory: "Documents/BlueDrive/Download/".
+- File Sharing: Android "FileProvider" for sharing local files through secure "content://" URIs.
+- Permissions: Runtime storage permissions and applicable Android storage-access handling.
+
+---
+
+🔐 Privacy and Limitations
+
+BlueDrive connects to the Telegram bot and channel configured by the user. Your files are hosted on Telegram's infrastructure, and the app uses Telegram's API to interact with them.
+
+Keep the following points in mind:
+
+- Protect your credentials: A bot token should never be committed to a public repository.
+- Channel privacy matters: Use a private channel and grant your bot only the permissions it requires.
+- Telegram limitations apply: Upload size, downloads, message deletion, request limits, and other operations are subject to the Telegram Bot API's current restrictions.
+- Local index: Your file index is stored on your device. Back it up if you need to preserve it independently of the app.
+- Network access: Uploading, downloading, and synchronizing file information require an internet connection.
+
+BlueDrive does not eliminate Telegram's own storage, privacy, or API limitations.
