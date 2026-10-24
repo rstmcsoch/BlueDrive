@@ -51,7 +51,7 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
         this.context = context;
         this.files = files;
         this.actionListener = actionListener;
-        this.dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
+        this.dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
     }
 
     @NonNull

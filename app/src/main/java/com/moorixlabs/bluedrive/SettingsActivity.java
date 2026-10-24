@@ -2,7 +2,6 @@ package com.moorixlabs.bluedrive;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -10,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -20,19 +18,6 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView tvConnectionStatus;
     private Button btnCheckConnection;
     private Button btnSaveSettings;
-    private TextView tvCurrentLanguage;
-
-    // Language cards
-    private CardView cardEnglish;
-    private CardView cardArabic;
-    private CardView cardFrench;
-
-    // Language indicators
-    private View indicatorEnglish;
-    private View indicatorArabic;
-    private View indicatorFrench;
-
-    private String selectedLanguage = "en";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +33,6 @@ public class SettingsActivity extends AppCompatActivity {
         initializeViews();
         loadCurrentSettings();
         setupClickListeners();
-
-        // Load and display current language
-        selectedLanguage = LocaleHelper.getPersistedLocale(this);
-        updateLanguageSelection(selectedLanguage);
     }
 
     @Override
@@ -66,17 +47,6 @@ public class SettingsActivity extends AppCompatActivity {
         tvConnectionStatus = findViewById(R.id.tvConnectionStatus);
         btnCheckConnection = findViewById(R.id.btnCheckConnection);
         btnSaveSettings = findViewById(R.id.btnSaveSettings);
-        tvCurrentLanguage = findViewById(R.id.tvCurrentLanguage);
-
-        // Language cards
-        cardEnglish = findViewById(R.id.cardEnglish);
-        cardArabic = findViewById(R.id.cardArabic);
-        cardFrench = findViewById(R.id.cardFrench);
-
-        // Language indicators
-        indicatorEnglish = findViewById(R.id.indicatorEnglish);
-        indicatorArabic = findViewById(R.id.indicatorArabic);
-        indicatorFrench = findViewById(R.id.indicatorFrench);
     }
 
     private void loadCurrentSettings() {
@@ -99,63 +69,6 @@ public class SettingsActivity extends AppCompatActivity {
     private void setupClickListeners() {
         btnSaveSettings.setOnClickListener(v -> saveSettings());
         btnCheckConnection.setOnClickListener(v -> checkConnection());
-
-        // Language card click listeners
-        cardEnglish.setOnClickListener(v -> selectLanguage("en"));
-        cardArabic.setOnClickListener(v -> selectLanguage("ar"));
-        cardFrench.setOnClickListener(v -> selectLanguage("fr"));
-    }
-
-    private void selectLanguage(String languageCode) {
-        selectedLanguage = languageCode;
-        updateLanguageSelection(languageCode);
-
-        // Save and apply the language immediately
-        LocaleHelper.setLocale(this, languageCode);
-
-        // Update hidden TextView for compatibility
-        tvCurrentLanguage.setText(LocaleHelper.getCurrentLanguageDisplay(this));
-
-        // Show feedback to user
-        String languageName = getLanguageName(languageCode);
-        Toast.makeText(this, getString(R.string.language_changed) + " " + languageName, Toast.LENGTH_SHORT).show();
-
-        // Recreate activity to apply changes
-        recreate();
-    }
-
-    private void updateLanguageSelection(String languageCode) {
-        // Hide all indicators first
-        indicatorEnglish.setVisibility(View.GONE);
-        indicatorArabic.setVisibility(View.GONE);
-        indicatorFrench.setVisibility(View.GONE);
-
-        // Show the selected indicator
-        switch (languageCode) {
-            case "en":
-                indicatorEnglish.setVisibility(View.VISIBLE);
-                break;
-            case "ar":
-                indicatorArabic.setVisibility(View.VISIBLE);
-                break;
-            case "fr":
-                indicatorFrench.setVisibility(View.VISIBLE);
-                break;
-            default:
-                indicatorEnglish.setVisibility(View.VISIBLE);
-                break;
-        }
-    }
-
-    private String getLanguageName(String languageCode) {
-        switch (languageCode) {
-            case "ar":
-                return "العربية";
-            case "fr":
-                return "Français";
-            default:
-                return "English";
-        }
     }
 
     private void saveSettings() {

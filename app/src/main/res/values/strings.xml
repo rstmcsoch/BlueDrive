@@ -133,9 +133,6 @@
     <string name="starting_video_viewer">Opening video player...</string>
     <string name="video_error">Failed to play video</string>
 
-    <string name="language_settings_label">Language</string>
-    <string name="language_select_label">Select Language</string>
-    <string name="language_changed">Language changed to</string>
     <!-- Main Activity -->
 
     <string name="tap_to_upload_first">Tap + to upload your first file</string>

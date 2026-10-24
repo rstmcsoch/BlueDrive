@@ -72,7 +72,7 @@ public class FileUtils {
         final String[] units = new String[]{"B", "KB", "MB", "GB", "TB"};
         int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
 
-        return String.format(Locale.getDefault(), "%.1f %s",
+        return String.format(Locale.ENGLISH, "%.1f %s",
                 size / Math.pow(1024, digitGroups),
                 units[digitGroups]);
     }
