@@ -1,7 +1,3 @@
-import org.gradle.kotlin.dsl.androidTestImplementation
-import org.gradle.kotlin.dsl.testImplementation
-
-
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -53,34 +49,18 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.room.common.jvm)
-    implementation(libs.room.runtime)
+    // These components are used directly by the Java/XML screens.
+    implementation(libs.recyclerview)
+    implementation(libs.cardview)
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
+    implementation(libs.photoview)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    // Telegram Bots library
-    implementation(libs.telegrambots)
-// Required for the library to function correctly
-    implementation(libs.slf4j.simple)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.junit.v130)
-    androidTestImplementation(libs.espresso.core.v370)
-    annotationProcessor(libs.room.compiler)
-    implementation(libs.lifecycle.runtime.ktx)
-    implementation(libs.lifecycle.viewmodel.ktx)
-    // ViewModel
-    implementation(libs.lifecycle.viewmodel)
-// LiveData
-    implementation(libs.lifecycle.livedata)
-    implementation(libs.glide)
-    annotationProcessor(libs.compiler)
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
-    implementation(libs.photoview)
-
 }

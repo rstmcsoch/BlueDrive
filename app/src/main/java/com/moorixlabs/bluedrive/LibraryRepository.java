@@ -23,7 +23,7 @@ public final class LibraryRepository {
   Map<String,CloudFile> unique=new LinkedHashMap<>(); for(CloudFile f:files) unique.putIfAbsent(f.getId(),f);
   return new ArrayList<>(unique.values());
  }
- private String readText(File f) throws IOException { try(InputStream in=new FileInputStream(f); ByteArrayOutputStream out=new ByteArrayOutputStream()) { byte[] b=new byte[8192]; int n; while((n=in.read(b))!=-1) out.write(b,0,n); return out.toString("UTF-8"); } }
+ private String readText(File f) throws IOException { try(InputStream in=new android.util.AtomicFile(f).openRead(); ByteArrayOutputStream out=new ByteArrayOutputStream()) { byte[] b=new byte[8192]; int n; while((n=in.read(b))!=-1) out.write(b,0,n); return out.toString("UTF-8"); } }
  public void hide(String id) {
   android.content.SharedPreferences prefs=context.getSharedPreferences("library_hidden",0);
   java.util.Set<String> ids=new java.util.HashSet<>(prefs.getStringSet("ids",java.util.Collections.emptySet()));

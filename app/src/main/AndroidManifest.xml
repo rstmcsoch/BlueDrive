@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.moorixlabs.bluedrive">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -36,7 +35,7 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ImageViewerActivity"
-            android:screenOrientation="unspecified"
+            android:exported="false"
             android:theme="@style/Base.Theme.BlueDrive" />
 
         <!-- FileProvider for sharing files (Android 7.0+) -->

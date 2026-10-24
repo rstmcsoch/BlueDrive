@@ -84,7 +84,10 @@ public class MainActivity extends AppCompatActivity {
  @Override protected void onResume() { super.onResume(); if(repository!=null) refresh(); }
  @Override protected void onSaveInstanceState(Bundle out) { super.onSaveInstanceState(out); out.putInt("destination",destination); out.putInt("category",category); out.putString("query",query); }
  @Override protected void onDestroy() { io.shutdown(); super.onDestroy(); }
- private void refresh() { io.execute(()->{List<CloudFile> loaded=repository.load(); runOnUiThread(()->{if(!isDestroyed()) { files=loaded; render(); }});}); }
+ private void refresh() {
+  if(io.isShutdown()) return;
+  try { io.execute(()->{List<CloudFile> loaded=repository.load(); runOnUiThread(()->{if(!isDestroyed()) { files=loaded; render(); }});}); } catch(RejectedExecutionException ignored) { /* Activity was destroyed during refresh. */ }
+ }
  int dp(int n) { return Math.round(n*getResources().getDisplayMetrics().density); }
  private TextView text(int id,int size,boolean bold) { return label(getString(id),size,bold); }
  private TextView label(String s,int size,boolean bold) {
@@ -134,10 +137,10 @@ public class MainActivity extends AppCompatActivity {
  }
  private void library() {
   LinearLayout l=column(); l.setPadding(dp(16),0,dp(16),0); host.addView(l);
-  EditText search=new EditText(this); search.setSingleLine(true); search.setHint(R.string.bd_search); search.setInputType(android.text.InputType.TYPE_CLASS_TEXT); search.setText(query); search.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_menu_search,0,android.R.drawable.ic_menu_close_clear_cancel,0); search.setOnTouchListener((v,event)->{if(event.getAction()==android.view.MotionEvent.ACTION_UP && event.getX()>search.getWidth()-dp(48)){ search.setText(""); return true;}return false;}); search.setMinHeight(dp(48)); l.addView(search,new LinearLayout.LayoutParams(-1,-2));
+  EditText search=new EditText(this); search.setSingleLine(true); search.setHint(R.string.bd_search); search.setInputType(android.text.InputType.TYPE_CLASS_TEXT); search.setText(query); search.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_menu_search,0,0,0); search.setMinHeight(dp(48)); l.addView(search,new LinearLayout.LayoutParams(-1,-2));
   LinearLayout controls=new LinearLayout(this);
   MaterialButton clear=new MaterialButton(this,null,com.google.android.material.R.attr.materialButtonTextButtonStyle);clear.setText(R.string.bd_clear_search);clear.setOnClickListener(v->search.setText(""));controls.addView(clear);
-  MaterialButton filter=new MaterialButton(this,null,com.google.android.material.R.attr.materialButtonTextButtonStyle); filter.setText(category<0?getString(R.string.bd_all):getString(categories[category])); filter.setOnClickListener(v->{String[] labels=new String[7]; labels[0]=getString(R.string.bd_all); for(int i=0;i<6;i++) labels[i+1]=getString(categories[i]); new AlertDialog.Builder(this).setTitle(R.string.bd_filter).setSingleChoiceItems(labels,category+1,(d,w)->{category=w-1; d.dismiss(); filter.setText(labels[w]); updateResults();}).show();}); controls.addView(filter,new LinearLayout.LayoutParams(0,-2,1));
+  MaterialButton filter=new MaterialButton(this,null,com.google.android.material.R.attr.materialButtonTextButtonStyle); filter.setText(category<0?getString(R.string.bd_all):getString(categories[category])); filter.setOnClickListener(v->{String[] labels=new String[7]; labels[0]=getString(R.string.bd_all); for(int i=0;i<6;i++) labels[i+1]=getString(categories[i]); new AlertDialog.Builder(this).setTitle(R.string.bd_filter).setSingleChoiceItems(labels,category+1,(d,w)->{category=w-1; d.dismiss(); filter.setText(labels[w]); updateResults();}).show();}); controls.addView(filter,new LinearLayout.LayoutParams(-2,-2));
   MaterialButton sort=new MaterialButton(this,null,com.google.android.material.R.attr.materialButtonTextButtonStyle); sort.setText(R.string.sort_files); sort.setOnClickListener(v->sortDialog()); controls.addView(sort);
   MaterialButton grid=new MaterialButton(this,null,com.google.android.material.R.attr.materialButtonTextButtonStyle); grid.setText(R.string.bd_view); grid.setOnClickListener(v->{prefs().edit().putBoolean("grid",!prefs().getBoolean("grid",false)).apply(); libraryRefresh();}); controls.addView(grid); HorizontalScrollView controlScroll=new HorizontalScrollView(this); controlScroll.setHorizontalScrollBarEnabled(false); controlScroll.addView(controls); l.addView(controlScroll);
   empty=text(R.string.bd_no_results,16,false); l.addView(empty);

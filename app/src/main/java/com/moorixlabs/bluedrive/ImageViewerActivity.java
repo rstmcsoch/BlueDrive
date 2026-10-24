@@ -42,16 +42,21 @@ public class ImageViewerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_viewer);
 
+        androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content), (view, insets) -> {
+            androidx.core.graphics.Insets bars = insets.getInsets(androidx.core.view.WindowInsetsCompat.Type.systemBars());
+            view.setPadding(bars.left, bars.top, bars.right, bars.bottom);
+            return insets;
+        });
         initializeViews();
         setupClickListeners();
 
         String local = getIntent().getStringExtra("local_uri");
         if (local != null) {
-            hideLoading(); photoView.setVisibility(View.VISIBLE);
+            showLoading();
             com.bumptech.glide.Glide.with(this).load(Uri.parse(local))
                 .listener(new com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable>() {
-                    public boolean onLoadFailed(com.bumptech.glide.load.engine.GlideException e, Object model, com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable> target, boolean first) { showError(getString(R.string.file_not_available)); return false; }
-                    public boolean onResourceReady(android.graphics.drawable.Drawable resource, Object model, com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable> target, com.bumptech.glide.load.DataSource source, boolean first) { return false; }
+                    public boolean onLoadFailed(com.bumptech.glide.load.engine.GlideException e, Object model, com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable> target, boolean first) { showError(getString(R.string.file_not_available)); return true; }
+                    public boolean onResourceReady(android.graphics.drawable.Drawable resource, Object model, com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable> target, com.bumptech.glide.load.DataSource source, boolean first) { hideLoading(); photoView.setVisibility(View.VISIBLE); return false; }
                 }).into(photoView);
             return;
         }
@@ -200,14 +205,8 @@ public class ImageViewerActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        // Clean up: Delete the downloaded image file
-        if (downloadedImageFile != null && downloadedImageFile.exists()) {
-            if (downloadedImageFile.delete()) {
-                Log.i(TAG, "✓ Temp image file deleted: " + downloadedImageFile.getName());
-            } else {
-                Log.w(TAG, "Failed to delete temp image: " + downloadedImageFile.getName());
-            }
-        }
+        // Downloads in the public library belong to the user. Closing a preview
+        // must not delete a downloaded file. Glide owns local-image resources.
 
         // Also recycle bitmap to free memory
         if (photoView != null && photoView.getDrawable() != null) {
