@@ -23,8 +23,6 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
         with:
-          # Override the action default (tools platform-tools). The legacy
-          # "tools" package is no longer available in the SDK repository.
           packages: platform-tools
           log-accepted-android-sdk-licenses: false
 
