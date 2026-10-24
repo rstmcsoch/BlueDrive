@@ -13,3 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Local validation tools
+__pycache__/
+*.pyc

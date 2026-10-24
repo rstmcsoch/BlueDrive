@@ -12,10 +12,14 @@ for path in res.rglob('*.xml'):
     for item in tree.getroot():
         if 'name' in item.attrib:
             names.setdefault(item.tag, set()).add(item.attrib['name'])
+# IDs referenced by Java must be declared in a layout or another XML resource.
+ids = set()
+for path in res.rglob('*.xml'):
+    ids.update(re.findall(r'@\+id/(\w+)', path.read_text()))
 errors = []
 for path in (root / 'app/src/main/java').rglob('*.java'):
-    for kind, name in re.findall(r'(?<!android\.)R\.(string|color|layout|drawable)\.(\w+)', path.read_text()):
-        valid = name in names.get(kind, set()) if kind in ('string', 'color') else any(res.glob(f'{kind}*/{name}.*'))
+    for kind, name in re.findall(r'(?<!android\.)R\.(string|color|layout|drawable|id)\.(\w+)', path.read_text()):
+        valid = name in ids if kind == 'id' else (name in names.get(kind, set()) if kind in ('string', 'color') else any(res.glob(f'{kind}*/{name}.*')))
         if not valid:
             errors.append(f'{path.name}: missing {kind}/{name}')
 for qualifier in ('values-fr', 'values-ar'):
