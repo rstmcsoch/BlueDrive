@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.moorixlabs.televault"
+    namespace = "com.moorixlabs.bluedrive"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.moorixlabs.televault"
+        applicationId = "com.moorixlabs.bluedrive"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

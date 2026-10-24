@@ -1,11 +1,11 @@
-package com.moorixlabs.televault;
+package com.moorixlabs.bluedrive;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
 public class SettingsUtils {
 
-    private static final String PREFS_NAME = "TelevaultPrefs";
+    private static final String PREFS_NAME = "BlueDrivePrefs";
     private static final String KEY_BOT_TOKEN = "bot_token";
     private static final String KEY_CHAT_ID = "chat_id";
 

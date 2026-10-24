@@ -1,4 +1,4 @@
-package com.moorixlabs.televault;
+package com.moorixlabs.bluedrive;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

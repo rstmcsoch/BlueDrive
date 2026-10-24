@@ -1,4 +1,4 @@
-package com.moorixlabs.televault;
+package com.moorixlabs.bluedrive;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private String chatId;
 
     private static final int PERMISSION_REQUEST_CODE = 100;
-    private static final String FILES_DATABASE = "televault_files.txt";
-    private static final String APP_FOLDER = "TeleVault";
+    private static final String FILES_DATABASE = "bluedrive_files.txt";
+    private static final String APP_FOLDER = "BlueDrive";
     private static final int RECENT_FILES_LIMIT = 10;
 
     private RecyclerView recyclerViewFiles;

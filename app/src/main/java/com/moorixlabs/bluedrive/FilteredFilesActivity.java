@@ -1,4 +1,4 @@
-package com.moorixlabs.televault;
+package com.moorixlabs.bluedrive;
 
 import android.content.Context;
 import android.content.Intent;
@@ -38,8 +38,8 @@ public class FilteredFilesActivity extends AppCompatActivity implements FileAdap
     private String botToken;
     private String chatId;
 
-    private static final String FILES_DATABASE = "televault_files.txt";
-    private static final String APP_FOLDER = "TeleVault";
+    private static final String FILES_DATABASE = "bluedrive_files.txt";
+    private static final String APP_FOLDER = "BlueDrive";
     private static final String ZARCHIVER_PACKAGE_NAME = "ru.zdevs.zarchiver";
 
     private RecyclerView recyclerViewFiles;

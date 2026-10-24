@@ -1,4 +1,4 @@
-package com.moorixlabs.televault;
+package com.moorixlabs.bluedrive;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,7 +7,7 @@ import androidx.core.os.LocaleListCompat;
 
 public class LocaleHelper {
 
-    private static final String PREFS_NAME = "TeleVaultSettings";
+    private static final String PREFS_NAME = "BlueDriveSettings";
     private static final String KEY_LANGUAGE = "selected_language";
     public static final String DEFAULT_LANG = "en";
 

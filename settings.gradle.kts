@@ -20,5 +20,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TeleVault"
+rootProject.name = "BlueDrive"
 include(":app")

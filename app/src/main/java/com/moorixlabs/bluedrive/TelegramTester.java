@@ -1,4 +1,4 @@
-package com.moorixlabs.televault;
+package com.moorixlabs.bluedrive;
 
 import android.util.Log;
 
@@ -74,7 +74,7 @@ public class TelegramTester {
     }
 
     private String sendTestMessage(String botToken, String chatId, String botName) throws Exception {
-        String testMessage = "✅ TeleVault connection successful! Bot: @" + botName;
+        String testMessage = "✅ BlueDrive connection successful! Bot: @" + botName;
         String urlString = TELEGRAM_API_BASE + botToken + "/sendMessage?chat_id=" + chatId +
                 "&text=" + java.net.URLEncoder.encode(testMessage, "UTF-8");
 
