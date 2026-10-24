@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TeleVault</string>
+    <string name="app_name">BlueDrive</string>
 
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -20,7 +20,7 @@
     <string name="pdfs">PDFs</string>
     <string name="other">Other</string>
 
-    <string name="settings_title">Telegram Vault Configuration</string>
+    <string name="settings_title">BlueDrive Configuration</string>
     <string name="bot_token_label">Bot Token (e.g., 123456:ABC-DEF…)</string>
     <string name="bot_token_hint">Paste your BotFather token here</string>
     <string name="bot_token_help">Get this from BotFather on Telegram.</string>
@@ -79,7 +79,7 @@
     <string name="downloading_dialog_title">Downloading</string>
     <string name="downloading_dialog_message"> %1$s…\n%2$d%%</string>
     <string name="download_complete_title">Download Complete</string>
-    <string name="download_complete_message">%s saved to Documents/TeleVault/Download</string>
+    <string name="download_complete_message">%s saved to Documents/BlueDrive/Download</string>
     <string name="download_failed">Download Failed</string>
     <string name="open_file">Open File</string>
     <string name="open_folder">Open Folder</string>
@@ -101,7 +101,7 @@
     <string name="clipboard_label_folder_path">Folder Path</string>
 
     <string name="storage_permission_required">Storage Permission Required</string>
-    <string name="permission_rationale">This app needs access to storage to:\n• Upload files to Telegram\n• Download files from Telegram\n• Save database in Documents/TeleVault\n• Keep your file list even after reinstalling\n\nPlease grant \'All Files Access\' permission.</string>
+    <string name="permission_rationale">This app needs access to storage to:\n• Upload files to Telegram\n• Download files from Telegram\n• Save database in Documents/BlueDrive\n• Keep your file list even after reinstalling\n\nPlease grant \'All Files Access\' permission.</string>
     <string name="grant_permission">Grant Permission</string>
     <string name="permission_denied_toast">Permission denied. App functionality is limited.</string>
     <string name="permission_denied_title">Permission Denied</string>

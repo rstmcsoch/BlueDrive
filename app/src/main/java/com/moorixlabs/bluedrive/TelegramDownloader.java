@@ -1,4 +1,4 @@
-package com.moorixlabs.televault;
+package com.moorixlabs.bluedrive;
 
 import android.content.Context;
 import android.net.Uri;
@@ -23,7 +23,7 @@ public class TelegramDownloader {
     private static final String TAG = "TelegramDownloader";
     private static final String TELEGRAM_API_BASE = "https://api.telegram.org/bot";
     private static final String TELEGRAM_FILE_BASE = "https://api.telegram.org/file/bot";
-    private static final String APP_FOLDER = "TeleVault";
+    private static final String APP_FOLDER = "BlueDrive";
     private static final String DOWNLOAD_FOLDER = "Download";
 
     private final Context context;
@@ -142,7 +142,7 @@ public class TelegramDownloader {
     }
 
     /**
-     * Step 2: Download file from Telegram and save to Documents/TeleVault/Download
+     * Step 2: Download file from Telegram and save to Documents/BlueDrive/Download
      */
     private Uri downloadFile(String filePath) {
         HttpURLConnection connection = null;
@@ -170,7 +170,7 @@ public class TelegramDownloader {
 
             inputStream = new BufferedInputStream(connection.getInputStream());
 
-            // Save to Documents/TeleVault/Download folder
+            // Save to Documents/BlueDrive/Download folder
             return saveToAppDownloadFolder(inputStream, fileSize);
 
         } catch (Exception e) {
@@ -188,10 +188,10 @@ public class TelegramDownloader {
     }
 
     /**
-     * Save file to Documents/TeleVault/Download folder
+     * Save file to Documents/BlueDrive/Download folder
      */
     private Uri saveToAppDownloadFolder(InputStream inputStream, long fileSize) throws Exception {
-        // Create app download folder: Documents/TeleVault/Download
+        // Create app download folder: Documents/BlueDrive/Download
         File documentsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
         File appFolder = new File(documentsDir, APP_FOLDER);
         File downloadFolder = new File(appFolder, DOWNLOAD_FOLDER);

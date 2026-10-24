@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TeleVault</string>
+    <string name="app_name">BlueDrive</string>
     <string name="ok">OK</string>
     <string name="cancel">Annuler</string>
     <string name="delete">Supprimer</string>
@@ -17,7 +17,7 @@
     <string name="videos">Vidéos</string>
     <string name="pdfs">PDFs</string>
     <string name="other">Autres</string>
-    <string name="settings_title">Configuration de TeleVault</string>
+    <string name="settings_title">Configuration de BlueDrive</string>
     <string name="bot_token_label">Jeton du Bot (ex: 123456:ABC-DEF…)</string>
     <string name="bot_token_hint">Collez votre jeton de BotFather ici</string>
     <string name="bot_token_help">Obtenez-le depuis BotFather sur Telegram.</string>
@@ -72,7 +72,7 @@
     <string name="downloading_dialog_title">Téléchargement</string>
     <string name="downloading_dialog_message">%1$s…\n%2$d%%</string>
     <string name="download_complete_title">Téléchargement terminé</string>
-    <string name="download_complete_message">%s sauvé dans Documents/TeleVault/Download</string>
+    <string name="download_complete_message">%s sauvé dans Documents/BlueDrive/Download</string>
     <string name="download_failed">Échec du téléchargement</string>
     <string name="open_file">Ouvrir le fichier</string>
     <string name="open_folder">Ouvrir le dossier</string>
@@ -93,7 +93,7 @@
     <string name="path_copied">Chemin copié</string>
     <string name="clipboard_label_folder_path">Chemin du dossier</string>
     <string name="storage_permission_required">Permission de stockage requise</string>
-    <string name="permission_rationale">L\'app a besoin d\'accéder au stockage pour:\n• Téléverser des fichiers\n• Télécharger des fichiers\n• Sauver la base de données dans Documents/TeleVault\n\nVeuillez accorder la permission \'Accès à tous les fichiers\'.</string>
+    <string name="permission_rationale">L\'app a besoin d\'accéder au stockage pour:\n• Téléverser des fichiers\n• Télécharger des fichiers\n• Sauver la base de données dans Documents/BlueDrive\n\nVeuillez accorder la permission \'Accès à tous les fichiers\'.</string>
     <string name="grant_permission">Accorder la permission</string>
     <string name="permission_denied_toast">Permission refusée. Fonctions limitées.</string>
     <string name="permission_denied_title">Permission refusée</string>

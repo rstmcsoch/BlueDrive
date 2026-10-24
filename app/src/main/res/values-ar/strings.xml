@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TeleVault</string>
+    <string name="app_name">BlueDrive</string>
     <string name="ok">موافق</string>
     <string name="cancel">إلغاء</string>
     <string name="delete">حذف</string>
@@ -17,7 +17,7 @@
     <string name="videos">الفيديوهات</string>
     <string name="pdfs">PDFs</string>
     <string name="other">أخرى</string>
-    <string name="settings_title">إعدادات TeleVault</string>
+    <string name="settings_title">إعدادات BlueDrive</string>
     <string name="bot_token_label">رمز البوت (مثال: 123456:ABC-DEF…)</string>
     <string name="bot_token_hint">ألصق رمز BotFather هنا</string>
     <string name="bot_token_help">احصل عليه من BotFather على تيليجرام.</string>
@@ -72,7 +72,7 @@
     <string name="downloading_dialog_title">جاري التنزيل</string>
     <string name="downloading_dialog_message">%1$s…\n%2$d%%</string>
     <string name="download_complete_title">اكتمل التنزيل</string>
-    <string name="download_complete_message">تم حفظ %s في Documents/TeleVault/Download</string>
+    <string name="download_complete_message">تم حفظ %s في Documents/BlueDrive/Download</string>
     <string name="download_failed">فشل التنزيل</string>
     <string name="open_file">فتح الملف</string>
     <string name="open_folder">فتح المجلد</string>
@@ -93,7 +93,7 @@
     <string name="path_copied">تم نسخ المسار</string>
     <string name="clipboard_label_folder_path">مسار المجلد</string>
     <string name="storage_permission_required">إذن التخزين مطلوب</string>
-    <string name="permission_rationale">يحتاج التطبيق إلى الوصول إلى التخزين من أجل:\n• رفع الملفات\n• تنزيل الملفات\n• حفظ قاعدة البيانات في Documents/TeleVault\n\nيرجى منح إذن \'الوصول إلى جميع الملفات\'.</string>
+    <string name="permission_rationale">يحتاج التطبيق إلى الوصول إلى التخزين من أجل:\n• رفع الملفات\n• تنزيل الملفات\n• حفظ قاعدة البيانات في Documents/BlueDrive\n\nيرجى منح إذن \'الوصول إلى جميع الملفات\'.</string>
     <string name="grant_permission">منح الإذن</string>
     <string name="permission_denied_toast">تم رفض الإذن. وظائف التطبيق محدودة.</string>
     <string name="permission_denied_title">تم رفض الإذن</string>
