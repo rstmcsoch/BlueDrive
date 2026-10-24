@@ -60,7 +60,7 @@ public class TelegramUploader {
                     Log.d(TAG, "Attempting to disconnect connection from cancel() thread.");
                     connection.disconnect();
                 } catch (Exception e) {
-                    Log.e(TAG, "Error disconnecting on cancel", e);
+                    Log.e(TAG, "Storage operation failed");
                 }
             }).start();
         }
@@ -69,6 +69,7 @@ public class TelegramUploader {
 
 
     public void upload() {
+        if (StoragePolicy.remoteBlocked()) { callback.onUploadFailed("Remote storage disabled pending provider approval."); return; }
         // HttpURLConnection connection = null; // <-- Now a class field
         DataOutputStream outputStream = null;
         InputStream inputStream = null;
@@ -205,7 +206,7 @@ public class TelegramUploader {
                 Log.d(TAG, "Upload cancelled (SocketException caught).");
                 callback.onUploadCancelled();
             } else {
-                Log.e(TAG, "❌ Upload exception (SocketException)", e);
+                Log.e(TAG, "Storage operation failed");
                 callback.onUploadFailed("Upload failed: " + e.getMessage());
             }
         } catch (java.io.IOException e) {
@@ -214,12 +215,12 @@ public class TelegramUploader {
                 Log.d(TAG, "Upload cancelled (IOException caught).");
                 callback.onUploadCancelled();
             } else {
-                Log.e(TAG, "❌ Upload exception (IOException)", e);
+                Log.e(TAG, "Storage operation failed");
                 callback.onUploadFailed("Upload failed: " + e.getMessage());
             }
         } catch (Exception e) {
             if (!isCancelled) {
-                Log.e(TAG, "❌ Upload exception", e);
+                Log.e(TAG, "Storage operation failed");
                 callback.onUploadFailed("Upload failed: " + e.getMessage());
             } else {
                 Log.d(TAG, "Upload cancelled (Generic Exception caught).");
@@ -231,7 +232,7 @@ public class TelegramUploader {
                 if (inputStream != null) inputStream.close();
                 if (connection != null) connection.disconnect();
             } catch (Exception e) {
-                Log.e(TAG, "Error closing connections", e);
+                Log.e(TAG, "Storage operation failed");
             }
         }
     }

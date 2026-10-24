@@ -29,6 +29,7 @@ public class TelegramDeleter {
     }
 
     public void delete() {
+        if (StoragePolicy.remoteBlocked()) { callback.onDeleteFailed("Remote storage disabled pending provider approval."); return; }
         HttpURLConnection connection = null;
         try {
             // Construct the URL for the deleteMessage API endpoint
@@ -66,7 +67,7 @@ public class TelegramDeleter {
             }
 
         } catch (Exception e) {
-            Log.e(TAG, "Exception during deletion", e);
+            Log.e(TAG, "Storage operation failed");
             callback.onDeleteFailed("Deletion failed: " + e.getMessage());
         } finally {
             if (connection != null) {

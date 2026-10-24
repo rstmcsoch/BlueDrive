@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F0F13"
+    android:background="@color/bd_background"
     android:fitsSystemWindows="true"
     tools:context=".SettingsActivity">
 
@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/settings_title"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/bd_text"
                 android:textSize="28sp"
                 android:textStyle="bold" />
 
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Configure your Telegram bot"
-                android:textColor="#A1A1AA"
+                android:textColor="@color/bd_muted"
                 android:textSize="14sp" />
 
             <!-- Bot Configuration Card -->
@@ -55,7 +55,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bot Configuration"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/bd_text"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -64,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="@string/bot_token_label"
-                        android:textColor="#C4B5FD"
+                        android:textColor="@color/bd_muted"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -74,11 +74,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:background="@android:color/transparent"
-                        android:backgroundTint="#A78BFA"
+                        android:backgroundTint="@color/bd_accent"
                         android:hint="@string/bot_token_hint"
                         android:inputType="textNoSuggestions"
-                        android:textColor="#FFFFFF"
-                        android:textColorHint="#52525B"
+                        android:textColor="@color/bd_text"
+                        android:textColorHint="@color/bd_muted"
                         android:textSize="16sp" />
 
                     <TextView
@@ -86,7 +86,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:text="@string/bot_token_help"
-                        android:textColor="#E9D5FF"
+                        android:textColor="@color/bd_muted"
                         android:textSize="12sp"
                         android:alpha="0.8" />
 
@@ -95,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:text="@string/chat_id_label"
-                        android:textColor="#C4B5FD"
+                        android:textColor="@color/bd_muted"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -105,11 +105,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:background="@android:color/transparent"
-                        android:backgroundTint="#A78BFA"
+                        android:backgroundTint="@color/bd_accent"
                         android:hint="@string/chat_id_hint"
                         android:inputType="textNoSuggestions"
-                        android:textColor="#FFFFFF"
-                        android:textColorHint="#52525B"
+                        android:textColor="@color/bd_text"
+                        android:textColorHint="@color/bd_muted"
                         android:textSize="16sp" />
 
                     <TextView
@@ -117,7 +117,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:text="@string/chat_id_help"
-                        android:textColor="#E9D5FF"
+                        android:textColor="@color/bd_muted"
                         android:textSize="12sp"
                         android:alpha="0.8" />
                 </LinearLayout>
@@ -142,10 +142,10 @@
                 android:layout_height="56dp"
                 android:layout_marginTop="12dp"
                 android:text="@string/check_test_connection"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/bd_text"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:backgroundTint="#8B5CF6"
+                android:backgroundTint="@color/bd_accent"
                 app:cornerRadius="16dp"
                 app:elevation="4dp" />
 
@@ -158,7 +158,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="24dp"
                 android:text="@string/save_settings"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/bd_text"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:backgroundTint="#65A30D"

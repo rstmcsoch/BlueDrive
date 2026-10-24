@@ -45,6 +45,17 @@ public class ImageViewerActivity extends AppCompatActivity {
         initializeViews();
         setupClickListeners();
 
+        String local = getIntent().getStringExtra("local_uri");
+        if (local != null) {
+            hideLoading(); photoView.setVisibility(View.VISIBLE);
+            com.bumptech.glide.Glide.with(this).load(Uri.parse(local))
+                .listener(new com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable>() {
+                    public boolean onLoadFailed(com.bumptech.glide.load.engine.GlideException e, Object model, com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable> target, boolean first) { showError(getString(R.string.file_not_available)); return false; }
+                    public boolean onResourceReady(android.graphics.drawable.Drawable resource, Object model, com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable> target, com.bumptech.glide.load.DataSource source, boolean first) { return false; }
+                }).into(photoView);
+            return;
+        }
+        if (StoragePolicy.remoteBlocked()) { showError(getString(R.string.bd_provider_reason)); return; }
         // Get data from intent
         String fileId = getIntent().getStringExtra(EXTRA_FILE_ID);
         String fileName = getIntent().getStringExtra(EXTRA_FILE_NAME);

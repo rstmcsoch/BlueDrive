@@ -1,0 +1,5 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/rootHost" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="@color/bd_background">
+<com.google.android.material.appbar.MaterialToolbar android:id="@+id/toolbar" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="64dp" app:logo="@drawable/bd_brand" app:title="@string/app_name" app:titleTextColor="@color/bd_text"/>
+<FrameLayout android:id="@+id/screenHost" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
+<com.google.android.material.bottomnavigation.BottomNavigationView android:id="@+id/navigation" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/bd_surface" app:labelVisibilityMode="labeled"/>
+</LinearLayout>

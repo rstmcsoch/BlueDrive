@@ -48,6 +48,7 @@ public class TelegramDownloader {
     }
 
     public void download() {
+        if (StoragePolicy.remoteBlocked()) { callback.onDownloadFailed("Remote storage disabled pending provider approval."); return; }
         try {
             // Step 1: Get file path from Telegram
             String filePath = getFilePath();
@@ -67,7 +68,7 @@ public class TelegramDownloader {
             }
 
         } catch (Exception e) {
-            Log.e(TAG, "Download exception", e);
+            Log.e(TAG, "Storage operation failed");
             callback.onDownloadFailed("Download error: " + e.getMessage());
         }
     }
@@ -129,14 +130,14 @@ public class TelegramDownloader {
             }
 
         } catch (Exception e) {
-            Log.e(TAG, "Error getting file path", e);
+            Log.e(TAG, "Storage operation failed");
             return null;
         } finally {
             try {
                 if (reader != null) reader.close();
                 if (connection != null) connection.disconnect();
             } catch (Exception e) {
-                Log.e(TAG, "Error closing connection", e);
+                Log.e(TAG, "Storage operation failed");
             }
         }
     }
@@ -152,7 +153,7 @@ public class TelegramDownloader {
         try {
             // Download URL
             String downloadUrl = TELEGRAM_FILE_BASE + botToken + "/" + filePath;
-            Log.i(TAG, "Downloading from: " + downloadUrl);
+            Log.i(TAG, "Downloading remote file");
 
             URL url = new URL(downloadUrl);
             connection = (HttpURLConnection) url.openConnection();
@@ -174,7 +175,7 @@ public class TelegramDownloader {
             return saveToAppDownloadFolder(inputStream, fileSize);
 
         } catch (Exception e) {
-            Log.e(TAG, "Error downloading file", e);
+            Log.e(TAG, "Storage operation failed");
             return null;
         } finally {
             try {
@@ -182,7 +183,7 @@ public class TelegramDownloader {
                 if (outputStream != null) outputStream.close();
                 if (connection != null) connection.disconnect();
             } catch (Exception e) {
-                Log.e(TAG, "Error closing connections", e);
+                Log.e(TAG, "Storage operation failed");
             }
         }
     }

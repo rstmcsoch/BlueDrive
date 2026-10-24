@@ -25,6 +25,7 @@ public class TelegramTester {
      * 2. Uses sendMessage to verify the chat ID.
      */
     public void runTest(String botToken, String chatId, TestCallback callback) {
+        if (StoragePolicy.remoteBlocked()) { callback.onTestFailed("Remote storage disabled pending provider approval."); return; }
         new Thread(() -> {
             try {
                 // Step 1: Verify Bot Token using getMe
@@ -44,7 +45,7 @@ public class TelegramTester {
                 callback.onTestSuccess(botName, messageId);
 
             } catch (Exception e) {
-                Log.e(TAG, "Test failed due to exception", e);
+                Log.e(TAG, "Storage operation failed");
                 callback.onTestFailed("General Test Failure: " + e.getMessage());
             }
         }).start();
