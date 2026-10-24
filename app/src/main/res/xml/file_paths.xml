@@ -1,6 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<paths>
-    <external-path
-        name="documents"
-        path="Documents/" />
-</paths>
+<paths><external-path name="documents" path="Documents/BlueDrive/"/><files-path name="private_files" path="media/"/><cache-path name="shared_cache" path="shared/"/></paths>

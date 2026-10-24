@@ -1,7 +1,11 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.BlueDrive" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-    </style>
-</resources>
+<resources><style name="Base.Theme.BlueDrive" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+ <item name="colorPrimary">@color/bd_accent</item><item name="colorSecondary">@color/bd_accent</item><item name="colorOnPrimary">@color/bd_surface</item>
+ <item name="colorSurface">@color/bd_surface</item><item name="colorOnSurface">@color/bd_text</item>
+ <item name="android:colorBackground">@color/bd_background</item><item name="android:windowBackground">@color/bd_background</item>
+ <item name="android:textColorPrimary">@color/bd_text</item><item name="android:textColorSecondary">@color/bd_muted</item>
+ <item name="android:statusBarColor">@color/bd_background</item><item name="android:navigationBarColor">@color/bd_surface</item>
+ <item name="android:windowLightStatusBar">false</item>
+ <item name="android:windowLightNavigationBar">false</item>
+ </style><style name="Theme.BlueDrive" parent="Base.Theme.BlueDrive"/>
+ <style name="AppTheme.AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog"/>
+ </resources>

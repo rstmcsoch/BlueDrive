@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000">
+    android:background="@color/bd_background">
 
     <!-- Loading Indicator -->
     <LinearLayout
@@ -20,7 +20,7 @@
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:indeterminateTint="#A78BFA" />
+            android:indeterminateTint="@color/bd_accent" />
 
         <TextView
             android:id="@+id/tvLoadingText"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Downloading image..."
-            android:textColor="#FFFFFF"
+            android:textColor="@color/bd_text"
             android:textSize="14sp" />
 
         <TextView
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="0%"
-            android:textColor="#C4B5FD"
+            android:textColor="@color/bd_muted"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Tap anywhere to close"
-            android:textColor="#A1A1AA"
+            android:textColor="@color/bd_muted"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -97,7 +97,7 @@
         android:layout_margin="16dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@android:drawable/ic_menu_close_clear_cancel"
-        app:tint="#FFFFFF"
+        app:tint="@color/bd_text"
         android:contentDescription="Close"
         android:elevation="10dp"
         android:clickable="true"

@@ -96,7 +96,7 @@ public class CloudFile {
     public String getFileExtension() {
         int lastDot = name.lastIndexOf('.');
         if (lastDot > 0 && lastDot < name.length() - 1) {
-            return name.substring(lastDot + 1).toLowerCase();
+            return name.substring(lastDot + 1).toLowerCase(java.util.Locale.ROOT);
         }
         return "";
     }
